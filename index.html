@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lumière Boutique & Parlor</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose: #c9748a;
+    --champagne: #f5e6d3;
+    --berry: #6b2d4e;
+    --gold: #c9a96e;
+    --cream: #fdf8f4;
+    --text: #2d1a24;
+    --muted: #8a6a76;
+    --white: #ffffff;
+    --shadow: 0 8px 32px rgba(107,45,78,0.12);
+    --shadow-lg: 0 20px 60px rgba(107,45,78,0.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,248,244,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,166,110,0.2);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--berry);letter-spacing:1px;}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:24px;list-style:none;}
+  .nav-links a{font-size:0.78rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--rose);}
+  .nav-cta{background:linear-gradient(135deg,var(--rose),var(--berry));color:#fff;border:none;padding:8px 18px;border-radius:20px;font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:1px;cursor:pointer;transition:.3s;}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,116,138,0.4);}
+
+  /* HERO */
+  .hero{min-height:100vh;background:linear-gradient(160deg,#fdf8f4 0%,#f5e6d3 40%,#f0d5e8 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px;position:relative;overflow:hidden;}
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.35;}
+  .orb1{width:400px;height:400px;background:radial-gradient(circle,#e8a0b8,transparent);top:-80px;right:-80px;}
+  .orb2{width:300px;height:300px;background:radial-gradient(circle,#c9a96e,transparent);bottom:40px;left:-60px;}
+  .hero-content{position:relative;z-index:1;max-width:460px;}
+  .hero-badge{display:inline-block;background:rgba(201,116,138,0.12);border:1px solid rgba(201,116,138,0.3);color:var(--rose);font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px;}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,8vw,3.6rem);font-weight:300;line-height:1.15;color:var(--berry);margin-bottom:8px;}
+  .hero h1 em{font-style:italic;color:var(--rose);}
+  .hero p{font-size:0.95rem;color:var(--muted);line-height:1.7;margin:16px 0 32px;}
+  .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:linear-gradient(135deg,var(--rose),var(--berry));color:#fff;border:none;padding:14px 28px;border-radius:30px;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:.5px;cursor:pointer;transition:.3s;text-decoration:none;display:inline-block;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,116,138,0.4);}
+  .btn-outline{background:transparent;color:var(--berry);border:1.5px solid var(--berry);padding:13px 28px;border-radius:30px;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:.5px;cursor:pointer;transition:.3s;text-decoration:none;display:inline-block;}
+  .btn-outline:hover{background:var(--berry);color:#fff;}
+
+  /* STATS */
+  .stats{background:linear-gradient(135deg,var(--berry),#8b3a62);padding:32px 24px;display:flex;justify-content:center;gap:0;}
+  .stat{flex:1;max-width:140px;text-align:center;padding:0 16px;border-right:1px solid rgba(255,255,255,0.15);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff;}
+  .stat-label{font-size:0.7rem;color:rgba(255,255,255,0.65);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+  /* SECTION BASE */
+  section{padding:64px 24px;}
+  .section-header{text-align:center;margin-bottom:40px;}
+  .section-tag{font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--rose);margin-bottom:8px;}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,2.6rem);font-weight:300;color:var(--berry);}
+  .section-title em{font-style:italic;}
+  .section-sub{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-top:10px;max-width:400px;margin-left:auto;margin-right:auto;}
+
+  /* SERVICES */
+  .services{background:#fff;}
+  .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:500px;margin:0 auto;}
+  .service-card{background:var(--cream);border-radius:16px;padding:20px 16px;text-align:center;border:1px solid rgba(201,166,110,0.15);transition:.3s;cursor:default;}
+  .service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:rgba(201,116,138,0.3);}
+  .service-icon{font-size:2rem;margin-bottom:10px;}
+  .service-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--berry);}
+  .service-desc{font-size:0.75rem;color:var(--muted);margin:4px 0 10px;line-height:1.5;}
+  .service-price{font-size:0.8rem;font-weight:600;color:var(--rose);}
+
+  /* PRODUCTS */
+  .products{background:var(--cream);}
+  .products-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .products-scroll::-webkit-scrollbar{display:none;}
+  .product-card{min-width:170px;background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(201,166,110,0.15);transition:.3s;flex-shrink:0;}
+  .product-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .product-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,var(--champagne),#f0d5e8);}
+  .product-info{padding:12px;}
+  .product-tag{font-size:0.62rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--rose);background:rgba(201,116,138,0.1);padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px;}
+  .product-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-weight:600;color:var(--berry);}
+  .product-price{font-size:0.8rem;color:var(--gold);font-weight:600;margin-top:4px;}
+
+  /* TESTIMONIALS */
+  .testimonials{background:#fff;}
+  .testi-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .testi-scroll::-webkit-scrollbar{display:none;}
+  .testi-card{min-width:260px;background:linear-gradient(135deg,var(--cream),#f5e6d3);border-radius:16px;padding:20px;border:1px solid rgba(201,166,110,0.2);flex-shrink:0;}
+  .stars{color:var(--gold);font-size:0.85rem;margin-bottom:8px;}
+  .testi-text{font-size:0.85rem;color:var(--text);line-height:1.65;font-style:italic;}
+  .testi-author{margin-top:12px;font-size:0.78rem;font-weight:600;color:var(--berry);}
+
+  /* ── BOOKING SECTION ── */
+  #booking{background:linear-gradient(160deg,#f9f1f6 0%,var(--champagne) 100%);padding:64px 0 0;}
+  #booking .section-header{padding:0 24px;}
+  .booking-wrapper{margin-top:32px;width:100%;position:relative;}
+  .booking-frame-container{width:100%;background:#fff;border-top:3px solid var(--rose);box-shadow:0 -8px 40px rgba(107,45,78,0.10);}
+  .booking-frame-container iframe{width:100%;min-height:700px;border:none;display:block;}
+  .booking-loading{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:2;transition:opacity .4s;}
+  .booking-loading.hidden{opacity:0;pointer-events:none;}
+  .spinner{width:36px;height:36px;border:3px solid rgba(201,116,138,0.2);border-top-color:var(--rose);border-radius:50%;animation:spin .7s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .booking-loading p{font-size:0.82rem;color:var(--muted);letter-spacing:.5px;}
+
+  /* CHATBOT */
+  #chatbot{background:var(--cream);padding:64px 24px;}
+  .chat-container{max-width:500px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(201,166,110,0.2);}
+  .chat-header{background:linear-gradient(135deg,var(--berry),#8b3a62);padding:20px;display:flex;align-items:center;gap:12px;}
+  .chat-avatar{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+  .chat-header-info h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;}
+  .chat-header-info p{font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:2px;}
+  .online-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;margin-right:4px;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  #chat-messages{height:360px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(201,116,138,0.3) transparent;}
+  .message{max-width:82%;animation:fadeUp .3s ease;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .message.bot{align-self:flex-start;}
+  .message.user{align-self:flex-end;}
+  .msg-bubble{padding:12px 16px;border-radius:18px;font-size:0.85rem;line-height:1.6;}
+  .message.bot .msg-bubble{background:var(--cream);color:var(--text);border-bottom-left-radius:4px;border:1px solid rgba(201,166,110,0.2);}
+  .message.user .msg-bubble{background:linear-gradient(135deg,var(--rose),var(--berry));color:#fff;border-bottom-right-radius:4px;}
+  .typing{display:flex;gap:4px;padding:12px 16px;background:var(--cream);border-radius:18px;border-bottom-left-radius:4px;width:60px;border:1px solid rgba(201,166,110,0.2);}
+  .typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.2s;}
+  .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+  .quick-replies{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;border-top:1px solid rgba(201,166,110,0.15);}
+  .qr-btn{background:transparent;border:1.5px solid var(--rose);color:var(--rose);padding:7px 14px;border-radius:20px;font-family:'Jost',sans-serif;font-size:0.78rem;font-weight:500;cursor:pointer;transition:.2s;}
+  .qr-btn:hover{background:var(--rose);color:#fff;}
+  .chat-input-area{display:flex;gap:8px;padding:14px 16px;border-top:1px solid rgba(201,166,110,0.15);background:#fff;}
+  #chat-input{flex:1;border:1.5px solid rgba(201,166,110,0.3);border-radius:24px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:0.85rem;color:var(--text);outline:none;background:var(--cream);transition:.2s;}
+  #chat-input:focus{border-color:var(--rose);}
+  #send-btn{width:42px;height:42px;background:linear-gradient(135deg,var(--rose),var(--berry));border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:.3s;flex-shrink:0;}
+  #send-btn:hover{transform:scale(1.08);}
+
+  /* FOOTER */
+  footer{background:linear-gradient(135deg,var(--berry),#3a1028);color:#fff;padding:40px 24px 24px;text-align:center;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:8px;}
+  .footer-logo span{color:var(--gold);}
+  .footer-tagline{font-size:0.78rem;color:rgba(255,255,255,0.5);letter-spacing:1px;margin-bottom:24px;}
+  .footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:24px;}
+  .footer-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.78rem;letter-spacing:.5px;transition:.2s;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-socials{display:flex;justify-content:center;gap:14px;margin-bottom:24px;}
+  .social-btn{width:36px;height:36px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;text-decoration:none;transition:.2s;}
+  .social-btn:hover{background:var(--rose);}
+  .footer-bottom{font-size:0.72rem;color:rgba(255,255,255,0.35);padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);}
+
+  /* FAB */
+  .fab{position:fixed;bottom:24px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,var(--rose),var(--berry));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 6px 24px rgba(201,116,138,0.45);z-index:99;transition:.3s;text-decoration:none;}
+  .fab:hover{transform:scale(1.1);}
+
+  @media(max-width:380px){
+    .services-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lumière<span>✦</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#chatbot">Skin AI</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('chatbot').scrollIntoView({behavior:'smooth'})">Skin Quiz ✨</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Luxury Beauty & Wellness</div>
+    <h1>Where Beauty <em>Blooms</em> in Every Touch</h1>
+    <p>Premium boutique skincare, expert parlor treatments, and personalised AI skin consultations — all crafted for you.</p>
+    <div class="hero-btns">
+      <a href="#booking" class="btn-primary">Book Appointment 💅</a>
+      <a href="#chatbot" class="btn-outline">Skin Consultation 🌸</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">2K+</div><div class="stat-label">Clients</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Years</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Happy</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <div class="section-tag">✦ Our Offerings</div>
+    <h2 class="section-title">Signature <em>Services</em></h2>
+    <p class="section-sub">Each treatment designed to restore glow, balance & radiance.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">✨</div><div class="service-name">Glow Facial</div><div class="service-desc">Deep cleanse & hydration boost</div><div class="service-price">₹1,200</div></div>
+    <div class="service-card"><div class="service-icon">💆</div><div class="service-name">Head Massage</div><div class="service-desc">Scalp & stress relief therapy</div><div class="service-price">₹800</div></div>
+    <div class="service-card"><div class="service-icon">💅</div><div class="service-name">Nail Art</div><div class="service-desc">Custom nail design & care</div><div class="service-price">₹600</div></div>
+    <div class="service-card"><div class="service-icon">👑</div><div class="service-name">Full Makeover</div><div class="service-desc">Bridal & occasion glam</div><div class="service-price">₹3,500</div></div>
+    <div class="service-card" style="grid-column:span 2"><div class="service-icon">🌿</div><div class="service-name">Body Polish</div><div class="service-desc">Exfoliate, nourish & renew skin</div><div class="service-price">₹2,000</div></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header">
+    <div class="section-tag">✦ Boutique Products</div>
+    <h2 class="section-title">Curated <em>Skincare</em></h2>
+    <p class="section-sub">Scroll to explore our expert-recommended collection.</p>
+  </div>
+  <div class="products-scroll">
+    <div class="product-card"><div class="product-img">🌹</div><div class="product-info"><div class="product-tag">Dry Skin</div><div class="product-name">Rose Glow Cream</div><div class="product-price">₹450</div></div></div>
+    <div class="product-card"><div class="product-img">💧</div><div class="product-info"><div class="product-tag">Oily Skin</div><div class="product-name">Aqua Matte Gel</div><div class="product-price">₹380</div></div></div>
+    <div class="product-card"><div class="product-img">🌸</div><div class="product-info"><div class="product-tag">Sensitive</div><div class="product-name">Petal Calm Serum</div><div class="product-price">₹620</div></div></div>
+    <div class="product-card"><div class="product-img">☀️</div><div class="product-info"><div class="product-tag">All Types</div><div class="product-name">SPF 50 Sunshield</div><div class="product-price">₹520</div></div></div>
+    <div class="product-card"><div class="product-img">🍯</div><div class="product-info"><div class="product-tag">Dry Skin</div><div class="product-name">Honey Butter Balm</div><div class="product-price">₹340</div></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header">
+    <div class="section-tag">✦ Client Love</div>
+    <h2 class="section-title">What They <em>Say</em></h2>
+  </div>
+  <div class="testi-scroll">
+    <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"The AI skin chatbot recommended the perfect serum for my combination skin — I'm glowing!"</p><div class="testi-author">— Priya M., Pune</div></div>
+    <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"Booked my bridal makeover so easily through the website. Absolutely loved the service!"</p><div class="testi-author">— Sneha K., Mumbai</div></div>
+    <div class="testi-card"><div class="stars">★★★★★</div><p class="testi-text">"Best facial I've ever had. The products suggested were exactly what my skin needed."</p><div class="testi-author">— Ananya R., Nashik</div></div>
+  </div>
+</section>
+
+<!-- ── BOOKING SECTION ── -->
+<section id="booking">
+  <div class="section-header">
+    <div class="section-tag">✦ Appointment</div>
+    <h2 class="section-title">Book Your <em>Visit</em></h2>
+    <p class="section-sub">Fill in the form below and our team will confirm your slot within 2 hours.</p>
+  </div>
+  <div class="booking-wrapper">
+    <div class="booking-frame-container">
+      <div class="booking-loading" id="booking-loading">
+        <div class="spinner"></div>
+        <p>Loading your booking form…</p>
+      </div>
+      <iframe
+        src="https://amado66330.softr.app"
+        title="Appointment Booking Form"
+        allow="fullscreen"
+        onload="document.getElementById('booking-loading').classList.add('hidden')"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- AI CHATBOT -->
+<section id="chatbot">
+  <div class="section-header">
+    <div class="section-tag">✦ AI Skin Consultant</div>
+    <h2 class="section-title">Discover Your <em>Skin Type</em></h2>
+    <p class="section-sub">Chat with our AI beauty expert for personalised skincare recommendations.</p>
+  </div>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-avatar">🌸</div>
+      <div class="chat-header-info">
+        <h3>Lumière Skin AI</h3>
+        <p><span class="online-dot"></span>Online — Beauty Expert</p>
+      </div>
+    </div>
+    <div id="chat-messages">
+      <div class="message bot"><div class="msg-bubble">Hello gorgeous! 🌸 I'm your personal skin consultant. I'll help you discover your skin type and recommend the best products & treatments for you. Ready to start?</div></div>
+    </div>
+    <div class="quick-replies" id="quick-replies">
+      <button class="qr-btn" onclick="sendQuick('Yes, let\'s start my skin analysis! ✨')">Start Skin Quiz ✨</button>
+      <button class="qr-btn" onclick="sendQuick('What services do you offer?')">Our Services</button>
+      <button class="qr-btn" onclick="sendQuick('I need product recommendations')">Products 🌿</button>
+    </div>
+    <div class="chat-input-area">
+      <input id="chat-input" type="text" placeholder="Ask about your skin…" onkeydown="if(event.key==='Enter')sendMessage()"/>
+      <button id="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lumière<span>✦</span></div>
+  <div class="footer-tagline">Beauty Boutique & Parlor · Pune, Maharashtra</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#products">Products</a>
+    <a href="#booking">Book Now</a>
+    <a href="#chatbot">Skin AI</a>
+  </div>
+  <div class="footer-socials">
+    <a class="social-btn" href="#">📷</a>
+    <a class="social-btn" href="#">💬</a>
+    <a class="social-btn" href="#">📘</a>
+  </div>
+  <div class="footer-bottom">© 2025 Lumière Boutique & Parlor · All Rights Reserved</div>
+</footer>
+
+<!-- FAB -->
+<a class="fab" href="#chatbot" title="Skin Consultation">🌸</a>
+
+<script>
+// API key & system prompt live securely in netlify/functions/chat.js — never exposed here
+let history = [];
+
+async function callClaude(userMsg) {
+  history.push({ role: "user", content: userMsg });
+  const res = await fetch("/api/chat", {          // ← calls YOUR secure backend
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages: history })   // API key never touches the browser
+  });
+  const data = await res.json();
+  const reply = data.content?.find(b => b.type === "text")?.text || "I'm having a little moment — please try again! 🌸";
+  history.push({ role: "assistant", content: reply });
+  return reply;
+}
+
+function appendMsg(text, role) {
+  const msgs = document.getElementById("chat-messages");
+  const div = document.createElement("div");
+  div.className = `message ${role}`;
+  div.innerHTML = `<div class="msg-bubble">${text}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById("chat-messages");
+  const t = document.createElement("div");
+  t.className = "message bot"; t.id = "typing-indicator";
+  t.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(t);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById("typing-indicator");
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = "";
+  document.getElementById("quick-replies").style.display = "none";
+  appendMsg(text, "user");
+  showTyping();
+  try {
+    const reply = await callClaude(text);
+    removeTyping();
+    appendMsg(reply, "bot");
+  } catch(e) {
+    removeTyping();
+    appendMsg("Oops! Something went wrong. Please try again 🌸", "bot");
+  }
+}
+
+function sendQuick(text) {
+  document.getElementById("chat-input").value = text;
+  sendMessage();
+}
+</script>
+</body>
+</html>
